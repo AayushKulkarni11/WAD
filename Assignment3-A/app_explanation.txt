@@ -1,0 +1,116 @@
+Explanation of app.js
+
+This project is a simple Node.js web server built using the Express framework.
+The main file is app.js, and its job is to start a server and return different
+HTML pages when the user visits different routes in the browser.
+
+Code Explanation
+
+1. const express = require('express');
+This line imports the Express module. Express is a Node.js framework that makes
+it easier to create servers, routes, and handle requests and responses.
+
+2. const path = require('path');
+This line imports the built-in path module from Node.js. It is used to safely
+create file paths that work correctly on different operating systems.
+
+3. const app = express();
+This creates an Express application object. We use this object to define routes
+and start the server.
+
+4. const port = 3000;
+This stores the port number on which the server will run. Here, the server runs
+on port 3000.
+
+5. app.get('/', (req, res) => { ... });
+This defines the route for the home page.
+When the user opens http://localhost:3000/, this route is triggered.
+res.sendFile(path.join(__dirname, 'public', 'home.html'));
+This sends the file home.html from the public folder as the response.
+
+6. app.get('/about', (req, res) => { ... });
+This defines the route for the About page.
+When the user opens http://localhost:3000/about, the server sends about.html.
+
+7. app.get('/contact', (req, res) => { ... });
+This defines the route for the Contact page.
+When the user opens http://localhost:3000/contact, the server sends contact.html.
+
+8. __dirname
+__dirname is a special Node.js variable that gives the absolute path of the
+current folder where app.js is present. It helps the program find files
+correctly.
+
+9. path.join(__dirname, 'public', 'home.html')
+This combines folder names into one correct full path. It avoids path errors and
+works properly on Windows, macOS, and Linux.
+
+10. app.listen(port, () => { ... });
+This starts the server and makes it listen for incoming requests on port 3000.
+The callback function runs once the server starts successfully.
+
+11. console.log(`Server is listening on port ${port}`);
+This prints a message in the terminal so the developer knows the server is
+running.
+
+How This App Works
+
+1. The server starts by running app.js.
+2. Express listens for client requests on port 3000.
+3. When a user enters a URL in the browser, the browser sends a request to the server.
+4. The server checks which route was requested.
+5. Based on the route, the server sends the corresponding HTML file.
+6. The browser receives the HTML file and displays the page.
+
+Node.js Theory
+
+Node.js is a JavaScript runtime environment that allows JavaScript to run
+outside the browser. It is built on Google Chrome's V8 engine.
+
+How Node.js Works
+
+1. Single-threaded
+Node.js mainly uses a single main thread to handle code execution.
+
+2. Event-driven
+Node.js works using events. It reacts when something happens, such as a user
+request, file read, or database result.
+
+3. Non-blocking I/O
+Node.js can handle tasks like file access, network requests, and database calls
+without stopping the whole program. While one task is waiting, Node.js can keep
+serving other requests.
+
+4. Event Loop
+The event loop is the core part of Node.js. It continuously checks for pending
+tasks and callbacks, then executes them when ready. This is why Node.js is fast
+for web applications and APIs.
+
+Why Node.js is Used
+
+1. It is fast and lightweight.
+2. It is good for building web servers and APIs.
+3. It uses JavaScript on both frontend and backend.
+4. It handles many users efficiently using asynchronous programming.
+
+Run Commands for This Project
+
+Open terminal in the Assignment3-A folder and run:
+
+1. Install dependencies
+npm install
+
+2. Start the server
+npm start
+
+Alternative start command:
+node app.js
+
+Project URL
+
+After starting the server, open:
+http://localhost:3000/
+
+Other available routes:
+http://localhost:3000/about
+http://localhost:3000/contact

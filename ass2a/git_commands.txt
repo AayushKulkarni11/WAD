@@ -1,0 +1,150 @@
+Git Commands Reference
+======================
+
+1. `git --version`
+   Checks whether Git is installed and shows the installed version.
+
+2. `git config --global user.name "Your Name"`
+   Sets the global Git username.
+
+3. `git config --global user.email "your@email.com"`
+   Sets the global Git email address.
+
+4. `git config --list`
+   Displays the current Git configuration.
+
+5. `git init`
+   Creates a new Git repository in the current folder.
+
+6. `git clone <repository-url>`
+   Copies an existing remote repository to your local machine.
+
+7. `git status`
+   Shows the current state of the working directory and staging area.
+
+8. `git add <file-name>`
+   Adds a specific file to the staging area.
+
+9. `git add .`
+   Adds all changed files in the current directory to the staging area.
+
+10. `git commit -m "commit message"`
+    Saves the staged changes with a message.
+
+11. `git log`
+    Shows the commit history.
+
+12. `git log --oneline`
+    Shows a short one-line version of commit history.
+
+13. `git diff`
+    Shows unstaged changes between the working directory and last commit.
+
+14. `git diff --staged`
+    Shows staged changes that are ready to be committed.
+
+15. `git branch`
+    Lists all local branches.
+
+16. `git branch <branch-name>`
+    Creates a new branch.
+
+17. `git checkout <branch-name>`
+    Switches to another branch.
+
+18. `git checkout -b <branch-name>`
+    Creates a new branch and switches to it immediately.
+
+19. `git switch <branch-name>`
+    Switches to the given branch using the newer command style.
+
+20. `git switch -c <branch-name>`
+    Creates and switches to a new branch.
+
+21. `git merge <branch-name>`
+    Merges the given branch into the current branch.
+
+22. `git branch -d <branch-name>`
+    Deletes a local branch.
+
+23. `git remote -v`
+    Shows the remote repository links.
+
+24. `git remote add origin <repository-url>`
+    Connects the local repository to a remote repository.
+
+25. `git push origin <branch-name>`
+    Uploads commits from the local branch to the remote repository.
+
+26. `git pull origin <branch-name>`
+    Downloads and merges changes from the remote repository.
+
+27. `git fetch`
+    Downloads remote changes without merging them.
+
+28. `git reset <file-name>`
+    Removes a file from the staging area but keeps its changes.
+
+29. `git restore <file-name>`
+    Restores a file in the working directory to its last committed state.
+
+30. `git restore --staged <file-name>`
+    Unstages a file from the staging area.
+
+31. `git rm <file-name>`
+    Deletes a file and stages that deletion.
+
+32. `git mv <old-name> <new-name>`
+    Renames or moves a file in Git.
+
+33. `git stash`
+    Temporarily saves uncommitted changes.
+
+34. `git stash pop`
+    Restores the most recently stashed changes.
+
+35. `git stash list`
+    Shows all saved stashes.
+
+36. `git tag`
+    Lists all tags in the repository.
+
+37. `git tag <tag-name>`
+    Creates a new tag.
+
+38. `git show`
+    Displays details of commits, tags, or other Git objects.
+
+39. `git show <commit-id>`
+    Displays full details of a specific commit.
+
+40. `git reflog`
+    Shows a history of branch tip updates and recent Git actions.
+
+41. `git cherry-pick <commit-id>`
+    Applies a specific commit from one branch onto the current branch.
+
+42. `git rebase <branch-name>`
+    Reapplies commits on top of another base branch.
+
+43. `git pull --rebase`
+    Pulls remote changes and rebases local commits on top.
+
+44. `git clean -n`
+    Previews untracked files that would be removed.
+
+45. `git clean -f`
+    Removes untracked files from the working directory.
+
+46. `git archive --format zip --output project.zip HEAD`
+    Creates a zip archive of the current project state.
+
+
+Short Basic Workflow
+--------------------
+1. `git init`
+2. `git status`
+3. `git add .`
+4. `git commit -m "first commit"`
+5. `git remote add origin <repository-url>`
+6. `git push origin main`

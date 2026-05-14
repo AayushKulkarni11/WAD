@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departments - jQuery Mobile</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <style>
+        .ui-content { text-align: center; }
+        .table-container { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header" data-theme="b">
+            <h1>Assignment 4-A jQuery Mobile</h1>
+        </div>
+
+        <div data-role="navbar" data-grid="b">
+
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="departments.html" class="ui-btn-active">Departments</a></li>
+                <li><a href="login_register.html">Login/Register</a></li>
+            </ul>
+        </div>
+
+        <div role="main" class="ui-content">
+            <h2>Department Information</h2>
+            <div class="table-container">
+                <form>
+                    <input id="filterTable-input" data-type="search" placeholder="Search departments...">
+                </form>
+
+                <table data-role="table" id="dept-table" data-mode="reflow" data-filter="true" data-input="#filterTable-input" class="ui-responsive table-stroke">
+
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Department</th>
+                            <th>Website</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>MCOE</td>
+                            <td>Computer Science</td>
+                            <td><a href="https://moderncoe.edu.in" data-rel="external">https://moderncoe.edu.in/</a></td>
+                        </tr>
+                        <tr>
+                            <td>PICT</td>
+                            <td>IT Department</td>
+                            <td><a href="https://moderncoe.edu.in/information-technology-it-engineering-college-pune" data-rel="external">IT Dept</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div data-role="footer" data-theme="b" data-position="fixed">
+            <h4 style="text-align: center;">Quick Links: <a href="index.html" style="color: white; text-decoration: none;">Home</a></h4>
+        </div>
+    </div>
+</body>
+</html>

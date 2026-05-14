@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Mobile</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <style>
+        .welcome-text { text-align: center; padding: 20px; }
+    </style>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header" data-theme="b">
+            <h1>jQuery Mobile</h1>
+        </div>
+
+        <div data-role="navbar" data-grid="b">
+
+            <ul>
+                <li> <a href="index.html" class="ui-btn-active"> Home </a></li>
+                <li> <a href="departments.html"> Departments </a></li>
+                <li> <a href="login_register.html"> Login/Register </a></li>
+            </ul>
+        </div>
+
+        <div role="main" class="ui-content welcome-text">
+            <h2>Welcome to PESModernCOE Portal</h2>
+            <p>This is a mobile-responsive application built using jQuery Mobile.</p>
+        </div>
+
+        <div data-role="footer" data-theme="b" data-position="fixed">
+            <div class="quicklinks" style="text-align: center;">
+                <h4>PESMODERNCOE &copy; 2026</h4>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,93 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - jQuery Mobile</title>
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <style>
+        .content-wrap { text-align: center; padding: 20px; }
+        .form-container { max-width: 500px; margin: 0 auto; text-align: left; }
+        .quicklinks { text-align: center; }
+    </style>
+</head>
+<body>
+    <div data-role="page">
+        <div data-role="header" data-theme="b">
+            <h1>Assignment 4-A jQuery Mobile</h1>
+        </div>
+
+        <div data-role="navbar" data-grid="b">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="departments.html">Departments</a></li>
+                <li><a href="login_register.html" class="ui-btn-active">Login/Register</a></li>
+            </ul>
+        </div>
+
+        <div role="main" class="ui-content content-wrap">
+            <h2>Register</h2>
+            <div class="form-container">
+                <form action="#" method="post">
+                    <div class="ui-field-contain">
+                        <label for="fullname">Full Name:</label>
+                        <input type="text" id="fullname" placeholder="Enter full name" required>
+
+                        <label for="address">Address:</label>
+                        <textarea cols="25" rows="4" id="address" placeholder="Enter address"></textarea>
+
+                        <label for="pincode">Pincode:</label>
+                        <input type="number" id="pincode" placeholder="Enter 6-digit pincode">
+
+                        <label for="dob">Date of Birth:</label>
+                        <input type="date" id="dob">
+
+                        <label for="email">Email-ID:</label>
+                        <input type="email" id="email" placeholder="Enter email" required>
+
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" placeholder="Enter password" required>
+
+                        <label for="confirm_password">Confirm Password:</label>
+                        <input type="password" id="confirm_password" placeholder="Re-enter password" required>
+
+                        <input type="submit" value="Register" data-theme="b">
+                    </div>
+                </form>
+            </div>
+            <p id="error-msg" style="color: red; font-weight: bold;"></p>
+            <p><a href="login.html">Already registered? Login</a></p>
+        </div>
+
+        <script>
+            $(document).on("pagecreate", function() {
+                $("form").on("submit", function(e) {
+                    var pass = $("#password").val();
+                    var conf = $("#confirm_password").val();
+                    if (pass !== conf) {
+                        e.preventDefault();
+                        $("#error-msg").text("Passwords do not match!");
+                    } else {
+                        $("#error-msg").text("");
+                        alert("Registration Successful!");
+                    }
+                });
+            });
+        </script>
+
+
+        <div data-role="footer" data-theme="b" data-position="fixed">
+            <div class="quicklinks">
+                <h4>PESMODERNCOE &copy; 2026s</h4>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

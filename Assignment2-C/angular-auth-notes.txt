@@ -1,0 +1,423 @@
+Angular Project Guide
+===================================
+
+1. Project Overview
+-------------------
+This project is a simple Angular authentication demo with three pages:
+- Login
+- Register
+- Dashboard
+
+The app demonstrates these Angular concepts:
+- Components
+- Modules
+- Routing
+- Route guards
+- Reactive forms
+- Template binding
+- Browser localStorage
+
+This project does not use a backend or database. User data and login state are stored in the browser through localStorage.
+
+
+2. How Angular Works in This Project
+------------------------------------
+Angular is a component-based frontend framework. Each page or UI section is usually built with:
+- HTML for structure
+- CSS for styling
+- TypeScript for logic
+
+In this project, Angular works in this flow:
+1. `src/main.ts` starts the application.
+2. Angular bootstraps `AppModule`.
+3. `AppModule` loads all required modules and components.
+4. `AppComponent` displays `<router-outlet>`.
+5. Routing decides which component should appear inside the router outlet.
+6. Forms collect input on the login and register pages.
+7. The auth guard protects the dashboard route.
+8. localStorage stores registered users and login session data.
+
+
+3. Run Commands
+---------------
+Open a terminal in the `Assignment2-C` folder and use:
+
+Install dependencies:
+`npm install`
+
+Start development server:
+`npm start`
+or
+`ng serve`
+
+Build the project:
+`npm run build`
+
+Build in watch mode:
+`npm run watch`
+
+Run tests:
+`npm test`
+
+Default local URL after starting the app:
+`http://localhost:4200`
+
+
+4. Common Angular CLI Commands
+------------------------------
+These commands are useful while building Angular projects.
+
+Create a new Angular project:
+`ng new project-name`
+
+Move into the project folder:
+`cd project-name`
+
+Start the Angular development server:
+`ng serve`
+
+Start the server and open in browser:
+`ng serve --open`
+
+Generate a component:
+`ng generate component component-name`
+or short form
+`ng g c component-name`
+
+Generate a module:
+`ng generate module module-name`
+or short form
+`ng g m module-name`
+
+Generate a routing module:
+`ng generate module app-routing --flat --module=app`
+
+Generate a service:
+`ng generate service service-name`
+or short form
+`ng g s service-name`
+
+Generate a guard:
+`ng generate guard auth`
+or short form
+`ng g g auth`
+
+Generate an interface:
+`ng generate interface interface-name`
+or short form
+`ng g i interface-name`
+
+Generate a pipe:
+`ng generate pipe pipe-name`
+or short form
+`ng g p pipe-name`
+
+Build the project:
+`ng build`
+
+Run unit tests:
+`ng test`
+
+Check Angular CLI version:
+`ng version`
+
+
+5. Folder Structure Used in This App
+------------------------------------
+Important files and folders:
+
+- `src/main.ts`
+  Entry point of the Angular app.
+
+- `src/app/app.module.ts`
+  Root Angular module.
+
+- `src/app/app-routing.module.ts`
+  Route configuration for page navigation.
+
+- `src/app/app.component.html`
+  Root template containing the router outlet.
+
+- `src/app/auth.guard.ts`
+  Route guard that protects the dashboard page.
+
+- `src/app/components/login`
+  Login page files.
+
+- `src/app/components/register`
+  Register page files.
+
+- `src/app/components/dashboard`
+  Dashboard page files.
+
+
+6. Angular Modules Used
+-----------------------
+File: `src/app/app.module.ts`
+
+This file is the root module of the application. It tells Angular what to load and what features are available.
+
+Modules imported in this project:
+
+1. `BrowserModule`
+- Required for running an Angular app in the browser.
+- Provides services needed to launch and render the app.
+
+2. `AppRoutingModule`
+- Contains the route definitions.
+- Enables navigation between login, register, and dashboard pages.
+
+3. `FormsModule`
+- Supports template-driven forms.
+- Imported here, although the current app mainly uses reactive forms.
+
+4. `ReactiveFormsModule`
+- Used to create and validate forms in TypeScript.
+- Powers `FormGroup`, `FormBuilder`, and `Validators` in login and register components.
+
+Declarations in `AppModule`:
+- `AppComponent`
+- `LoginComponent`
+- `RegisterComponent`
+- `DashboardComponent`
+
+Bootstrap component:
+- `AppComponent`
+
+
+7. Angular Core Files Used
+--------------------------
+1. `main.ts`
+- This is the entry point of the application.
+- It bootstraps `AppModule`, which starts the Angular app.
+
+2. `AppComponent`
+- This is the root component.
+- Its HTML file contains `<router-outlet>`.
+- The routed pages are displayed inside that outlet.
+
+3. `AppRoutingModule`
+- Maps URL paths to components.
+- Controls navigation flow in the app.
+
+
+8. Routing Used in the App
+--------------------------
+File: `src/app/app-routing.module.ts`
+
+Routes configured:
+- `/login` -> `LoginComponent`
+- `/register` -> `RegisterComponent`
+- `/home` -> `DashboardComponent`
+- `/` redirects to `/login`
+
+Special behavior:
+- The `/home` route is protected with `canActivate: [AuthGuard]`
+
+Meaning:
+- A user can open login and register directly.
+- A user can open dashboard only when authenticated.
+
+
+9. AuthGuard Working
+--------------------
+File: `src/app/auth.guard.ts`
+
+Purpose:
+- Prevent unauthorized users from opening the dashboard.
+
+How it works:
+1. It checks `localStorage.getItem('isLoggedIn')`.
+2. If the value is not `"true"`, the user is redirected.
+3. The route is blocked by returning `false`.
+4. If the value is `"true"`, the route is allowed.
+
+Why it matters:
+- This is the route-protection part of the project.
+- It shows how Angular can control access before loading a page.
+
+
+10. Component-by-Component Working
+----------------------------------
+LoginComponent
+File: `src/app/components/login/login.component.ts`
+
+Purpose:
+- Accept user name and email
+- Validate input
+- Check whether the user is already registered
+
+Angular features used:
+- `Component`
+- `OnInit`
+- `FormBuilder`
+- `FormGroup`
+- `Validators`
+- `Router`
+
+Working:
+1. `ngOnInit()` creates the login form.
+2. The form has two controls: `name` and `email`.
+3. Validation rules:
+- name is required
+- email is required
+- email must be in valid format
+4. `loginSubmit()` reads `registeredUsers` from localStorage.
+5. It finds a matching user by name and email.
+6. If found, it stores session data:
+- `isLoggedIn`
+- `name`
+- `email`
+7. It navigates to `/home`.
+8. If not found, it shows an error message.
+
+
+RegisterComponent
+File: `src/app/components/register/register.component.ts`
+
+Purpose:
+- Register a new user in browser storage
+
+Angular features used:
+- `Component`
+- `OnInit`
+- `FormBuilder`
+- `FormGroup`
+- `Validators`
+- `Router`
+
+Working:
+1. `ngOnInit()` creates the register form.
+2. The form contains `name` and `email`.
+3. Validation rules are the same as login.
+4. `registerSubmit()` reads existing users from localStorage.
+5. It checks whether the email already exists.
+6. If the email exists, it shows an error.
+7. If the email is new, it stores the new user inside `registeredUsers`.
+8. It redirects the user to the login page.
+
+
+DashboardComponent
+File: `src/app/components/dashboard/dashboard.component.ts`
+
+Purpose:
+- Display logged-in user information
+- Allow logout
+
+Angular features used:
+- `Component`
+- `OnInit`
+- `Router`
+
+Working:
+1. `ngOnInit()` reads stored user data from localStorage.
+2. It sets:
+- `userName`
+- `userEmail`
+- `nameInitial`
+- `joinDate`
+3. The dashboard template displays those values.
+4. `logout()` clears login-related values from localStorage.
+5. It redirects the user back to `login`.
+
+
+11. Angular Template Syntax Used
+--------------------------------
+Examples from this project:
+
+Interpolation:
+`{{ userName }}`
+- Displays a TypeScript variable in HTML.
+
+Property binding:
+`[formGroup]="loginForm"`
+- Connects the HTML form to a reactive form object.
+
+Form control binding:
+`formControlName="email"`
+- Connects an input field to one control inside the form group.
+
+Event binding:
+`(click)="loginSubmit()"`
+- Calls a TypeScript method when the button is clicked.
+
+Conditional rendering:
+`*ngIf="loginError"`
+- Shows content only if the condition is true.
+
+Disabled state binding:
+`[disabled]="loginForm.invalid"`
+- Disables the button until the form becomes valid.
+
+
+12. Browser Storage Used
+------------------------
+This project uses `localStorage`.
+
+Keys used:
+- `registeredUsers`
+- `isLoggedIn`
+- `name`
+- `email`
+
+Why JSON is needed:
+- localStorage stores values only as strings
+- arrays and objects must be saved using `JSON.stringify()`
+- saved arrays and objects must be read back using `JSON.parse()`
+
+
+13. End-to-End User Flow
+------------------------
+1. The app opens and redirects to login.
+2. A new user goes to register.
+3. Register form saves the new user in localStorage.
+4. The user returns to login.
+5. Login checks the entered values against stored users.
+6. On success, login session values are saved.
+7. The user enters dashboard.
+8. AuthGuard allows the route because `isLoggedIn` is set to `"true"`.
+9. Dashboard shows user details.
+10. Logout clears the session and returns to login.
+
+
+14. Important Angular Terms
+---------------------------
+- `Component`: Controls a part of the UI.
+- `Module`: Groups Angular features and app parts together.
+- `Bootstrap`: Starts the Angular application.
+- `Route`: Connects a URL path to a component.
+- `Guard`: Decides whether a route can be opened.
+- `Reactive Form`: A form created and validated in TypeScript.
+- `Interpolation`: Showing TypeScript data in HTML using `{{ }}`.
+- `Event Binding`: Triggering methods from HTML using `(event)`.
+
+
+15. Module and File Summary
+---------------------------
+`AppModule`
+- Root module that connects everything together.
+
+`AppRoutingModule`
+- Handles page navigation.
+
+`AuthGuard`
+- Protects the dashboard route.
+
+`AppComponent`
+- Root layout with router outlet.
+
+`LoginComponent`
+- Logs in an existing registered user.
+
+`RegisterComponent`
+- Registers a new user.
+
+`DashboardComponent`
+- Displays user information after login.
+
+
+16. Short Viva or Exam Explanation
+----------------------------------
+You can explain the project like this:
+
+"This project is an Angular authentication demo built using components, routing, reactive forms, and localStorage. The register module saves a new user in the browser, the login module validates the user from stored data, the auth guard protects the dashboard route, and the dashboard module shows the logged-in user details. AppModule connects all components and Angular modules, while AppRoutingModule controls navigation between pages."

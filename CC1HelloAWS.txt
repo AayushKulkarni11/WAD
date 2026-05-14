@@ -1,0 +1,265 @@
+ sam init
+
+        SAM CLI now collects telemetry to better understand customer needs.
+
+        You can OPT OUT and disable telemetry collection by setting the
+        environment variable SAM_CLI_TELEMETRY=0 in your shell.
+        Thanks for your help!
+
+        Learn More: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-telemetry.html
+
+
+You can preselect a particular runtime or package type when using the `sam init` experience.
+Call `sam init --help` to learn more.
+
+Which template source would you like to use?
+        1 - AWS Quick Start Templates
+        2 - Custom Template Location
+Choice: 1
+
+Choose an AWS Quick Start application template
+        1 - Hello World Example
+        2 - Data processing
+        3 - Hello World Example with Powertools for AWS Lambda
+        4 - Multi-step workflow
+        5 - Scheduled task
+        6 - Standalone function
+        7 - Serverless API
+        8 - Infrastructure event management
+        9 - Lambda Response Streaming
+        10 - GraphQLApi Hello World Example
+        11 - Full Stack
+        12 - Durable Functions
+        13 - Lambda EFS example
+        14 - Serverless Connector Hello World Example
+        15 - Multi-step workflow with Connectors
+        16 - Hello World Durable Function Example
+        17 - DynamoDB Example
+        18 - Machine Learning
+Template: 1
+
+Use the most popular runtime and package type? (python3.14 and zip) [y/N]: N
+
+Which runtime would you like to use?
+        1 - dotnet10
+        2 - dotnet8
+        3 - dotnet6
+        4 - go (provided.al2)
+        5 - go (provided.al2023)
+        6 - graalvm.java11 (provided.al2)
+        7 - graalvm.java17 (provided.al2)
+        8 - java25
+        9 - java21
+        10 - java17
+        11 - java11
+        12 - java8.al2
+        13 - nodejs24.x
+        14 - nodejs22.x
+        15 - nodejs20.x
+        16 - python3.9
+        17 - python3.14
+        18 - python3.13
+        19 - python3.12
+        20 - python3.11
+        21 - python3.10
+        22 - ruby3.4
+        23 - ruby3.3
+        24 - ruby3.2
+        25 - rust (provided.al2)
+        26 - rust (provided.al2023)
+Runtime: 18
+
+What package type would you like to use?
+        1 - Zip
+        2 - Image
+Package type: 1
+
+Based on your selections, the only dependency manager available is pip.
+We will proceed copying the template using pip.
+
+Would you like to enable X-Ray tracing on the function(s) in your application?  [y/N]: 
+
+Would you like to enable monitoring using CloudWatch Application Insights?
+For more info, please view https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch-application-insights.html [y/N]: 
+
+Would you like to set Structured Logging in JSON format on your Lambda functions?  [y/N]: 
+
+Project name [sam-app]: web
+                                                                                                                                                                                                                              
+Cloning from https://github.com/aws/aws-sam-cli-app-templates (process may take a moment)                                                                                                                                     
+
+    -----------------------
+    Generating application:
+    -----------------------
+    Name: web
+    Runtime: python3.13
+    Architectures: x86_64
+    Dependency Manager: pip
+    Application Template: hello-world
+    Output Directory: .
+    Configuration file: web/samconfig.toml
+    
+    Next steps can be found in the README file at web/README.md
+        
+
+Commands you can use next
+=========================
+[*] Create pipeline: cd web && sam pipeline init --bootstrap
+[*] Validate SAM template: cd web && sam validate
+[*] Test Function in the Cloud: cd web && sam sync --stack-name {stack-name} --watch
+
+
+SAM CLI update available (1.159.1); (1.156.0 installed)
+To download: https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-install.html
+~ $ ls
+web
+~ $ cd web/
+web $ sam build
+Starting Build use cache                                                                                                                                                                                                      
+Manifest file is changed (new hash: 3298f13049d19cffaa37ca931dd4d421) or dependency folder (.aws-sam/deps/eab2704a-c0ec-4b80-908c-249613f84bb7) is missing for (HelloWorldFunction), downloading dependencies and             
+copying/building source                                                                                                                                                                                                       
+Building codeuri: /home/cloudshell-user/web/hello_world runtime: python3.13 architecture: x86_64 functions: HelloWorldFunction                                                                                                
+ Running PythonPipBuilder:CleanUp                                                                                                                                                                                             
+ Running PythonPipBuilder:ResolveDependencies                                                                                                                                                                                 
+ Running PythonPipBuilder:CopySource                                                                                                                                                                                          
+ Running PythonPipBuilder:CopySource                                                                                                                                                                                          
+
+Build Succeeded
+
+Built Artifacts  : .aws-sam/build
+Built Template   : .aws-sam/build/template.yaml
+
+Commands you can use next
+=========================
+[*] Validate SAM template: sam validate
+[*] Invoke Function: sam local invoke
+[*] Test Function in the Cloud: sam sync --stack-name {{stack-name}} --watch
+[*] Deploy: sam deploy --guided
+web $ sam deploy --guided
+
+Configuring SAM deploy
+======================
+
+        Looking for config file [samconfig.toml] :  Found
+        Reading default arguments  :  Success
+
+        Setting default arguments for 'sam deploy'
+        =========================================
+        Stack Name [web]: 
+        AWS Region [ap-south-1]: 
+        #Shows you resources changes to be deployed and require a 'Y' to initiate deploy
+        Confirm changes before deploy [Y/n]: n
+        #SAM needs permission to be able to create roles to connect to the resources in your template
+        Allow SAM CLI IAM role creation [Y/n]: 
+        #Preserves the state of previously provisioned resources when an operation fails
+        Disable rollback [y/N]: 
+        HelloWorldFunction has no authentication. Is this okay? [y/N]: y
+        Save arguments to configuration file [Y/n]: 
+        SAM configuration file [samconfig.toml]: 
+        SAM configuration environment [default]: 
+
+        Looking for resources needed for deployment:
+        Creating the required resources...
+        Successfully created!
+
+        Managed S3 bucket: aws-sam-cli-managed-default-samclisourcebucket-svztgjza1i4u
+        Auto resolution of buckets can be turned off by setting resolve_s3=False
+        To use a specific S3 bucket, set --s3-bucket=<bucket_name>
+        Above settings can be stored in samconfig.toml
+                                                                                                                                                                                                                              
+        Parameter "stack_name=web" in [default.deploy.parameters] is defined as a global parameter [default.global.parameters].                                                                                               
+        This parameter will be only saved under [default.global.parameters] in /home/cloudshell-user/web/samconfig.toml.                                                                                                      
+
+        Saved arguments to config file
+        Running 'sam deploy' for future deployments will use the parameters saved above.
+        The above parameters can be changed by modifying samconfig.toml
+        Learn more about samconfig.toml syntax at 
+        https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-cli-config.html
+
+        Uploading to web/edb1220b43543e0bce444c5ce8a7b4e6  627941 / 627941  (100.00%)
+
+        Deploying with following values
+        ===============================
+        Stack name                   : web
+        Region                       : ap-south-1
+        Confirm changeset            : False
+        Disable rollback             : False
+        Deployment s3 bucket         : aws-sam-cli-managed-default-samclisourcebucket-svztgjza1i4u
+        Capabilities                 : ["CAPABILITY_IAM"]
+        Parameter overrides          : {}
+        Signing Profiles             : {}
+
+Initiating deployment
+=====================
+
+        Uploading to web/89513a803a54bc61ea397edfb7de22d8.template  1172 / 1172  (100.00%)
+
+
+Waiting for changeset to be created..
+
+CloudFormation stack changeset
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Operation                                              LogicalResourceId                                      ResourceType                                           Replacement                                          
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
++ Add                                                  HelloWorldFunctionHelloWorldPermissionProd             AWS::Lambda::Permission                                N/A                                                  
++ Add                                                  HelloWorldFunctionRole                                 AWS::IAM::Role                                         N/A                                                  
++ Add                                                  HelloWorldFunction                                     AWS::Lambda::Function                                  N/A                                                  
++ Add                                                  ServerlessRestApiDeployment47fc2d5f9d                  AWS::ApiGateway::Deployment                            N/A                                                  
++ Add                                                  ServerlessRestApiProdStage                             AWS::ApiGateway::Stage                                 N/A                                                  
++ Add                                                  ServerlessRestApi                                      AWS::ApiGateway::RestApi                               N/A                                                  
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Changeset created successfully. arn:aws:cloudformation:ap-south-1:632638637079:changeSet/samcli-deploy1778695519/5bb4aea2-f71e-44c3-95c6-5ece6b970f70
+
+
+2026-05-13 18:05:25 - Waiting for stack create/update to complete
+
+CloudFormation events from stack operations (refresh every 5.0 seconds)
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ResourceStatus                                         ResourceType                                           LogicalResourceId                                      ResourceStatusReason                                 
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CREATE_IN_PROGRESS                                     AWS::CloudFormation::Stack                             web                                                    User Initiated                                       
+CREATE_IN_PROGRESS                                     AWS::IAM::Role                                         HelloWorldFunctionRole                                 -                                                    
+CREATE_IN_PROGRESS                                     AWS::IAM::Role                                         HelloWorldFunctionRole                                 Resource creation Initiated                          
+CREATE_COMPLETE                                        AWS::IAM::Role                                         HelloWorldFunctionRole                                 -                                                    
+CREATE_IN_PROGRESS                                     AWS::Lambda::Function                                  HelloWorldFunction                                     -                                                    
+CREATE_IN_PROGRESS                                     AWS::Lambda::Function                                  HelloWorldFunction                                     Resource creation Initiated                          
+CREATE_IN_PROGRESS - CONFIGURATION_COMPLETE            AWS::Lambda::Function                                  HelloWorldFunction                                     Eventual consistency check initiated                 
+CREATE_IN_PROGRESS                                     AWS::ApiGateway::RestApi                               ServerlessRestApi                                      -                                                    
+CREATE_IN_PROGRESS                                     AWS::ApiGateway::RestApi                               ServerlessRestApi                                      Resource creation Initiated                          
+CREATE_COMPLETE                                        AWS::ApiGateway::RestApi                               ServerlessRestApi                                      -                                                    
+CREATE_IN_PROGRESS                                     AWS::ApiGateway::Deployment                            ServerlessRestApiDeployment47fc2d5f9d                  -                                                    
+CREATE_IN_PROGRESS                                     AWS::Lambda::Permission                                HelloWorldFunctionHelloWorldPermissionProd             -                                                    
+CREATE_IN_PROGRESS                                     AWS::Lambda::Permission                                HelloWorldFunctionHelloWorldPermissionProd             Resource creation Initiated                          
+CREATE_COMPLETE                                        AWS::Lambda::Permission                                HelloWorldFunctionHelloWorldPermissionProd             -                                                    
+CREATE_IN_PROGRESS                                     AWS::ApiGateway::Deployment                            ServerlessRestApiDeployment47fc2d5f9d                  Resource creation Initiated                          
+CREATE_COMPLETE                                        AWS::Lambda::Function                                  HelloWorldFunction                                     -                                                    
+CREATE_COMPLETE                                        AWS::ApiGateway::Deployment                            ServerlessRestApiDeployment47fc2d5f9d                  -                                                    
+CREATE_IN_PROGRESS                                     AWS::ApiGateway::Stage                                 ServerlessRestApiProdStage                             -                                                    
+CREATE_IN_PROGRESS                                     AWS::ApiGateway::Stage                                 ServerlessRestApiProdStage                             Resource creation Initiated                          
+CREATE_COMPLETE                                        AWS::ApiGateway::Stage                                 ServerlessRestApiProdStage                             -                                                    
+CREATE_COMPLETE                                        AWS::CloudFormation::Stack                             web                                                    -                                                    
+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+CloudFormation outputs from deployed stack
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Outputs                                                                                                                                                                                                                   
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Key                 HelloWorldFunctionIamRole                                                                                                                                                                             
+Description         Implicit IAM Role created for Hello World function                                                                                                                                                    
+Value               arn:aws:iam::632638637079:role/web-HelloWorldFunctionRole-MXvg8ipztl0z                                                                                                                                
+
+Key                 HelloWorldApi                                                                                                                                                                                         
+Description         API Gateway endpoint URL for Prod stage for Hello World function                                                                                                                                      
+Value               https://pwvcwisnsk.execute-api.ap-south-1.amazonaws.com/Prod/hello/                                                                                                                                   
+
+Key                 HelloWorldFunction                                                                                                                                                                                    
+Description         Hello World Lambda Function ARN                                                                                                                                                                       
+Value               arn:aws:lambda:ap-south-1:632638637079:function:web-HelloWorldFunction-bMbvt8gF2r3v                                                                                                                   
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+Successfully created/updated stack - web in ap-south-1
+
+web $ 

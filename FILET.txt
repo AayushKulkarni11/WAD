@@ -1,0 +1,8 @@
+﻿Vagrant
+PAss
+Ifconfig
+Touch hello.txt
+Nano hello.txt
+Scp hello.txt Vagrant@ ip of next machine :/home/vagrant 
+Ls
+Cat hello.txt

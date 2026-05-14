@@ -1,0 +1,229 @@
+ass1b Project Explanation
+=========================
+
+1. Project Overview
+-------------------
+This project is a simple user registration and display system built with:
+- HTML
+- JavaScript
+- AJAX using `XMLHttpRequest`
+- Browser `localStorage`
+
+The project contains two main files:
+- `index.html`
+- `user.html`
+
+`index.html` is used to enter and save user details.
+`user.html` is used to display the saved user details in a table.
+
+
+2. Working of index.html
+------------------------
+This page contains:
+- a registration form
+- a submit button
+- a link to open `user.html`
+
+When the user fills the form and clicks submit:
+1. JavaScript stops the normal form submission.
+2. It reads the entered name and email.
+3. It creates a user object.
+4. It sends the user data to the server using AJAX.
+5. After the response is received, it saves the user data in `localStorage`.
+6. It shows a success message.
+7. It clears the form.
+
+
+3. Line-by-Line Explanation of index.html Script
+------------------------------------------------
+`document.getElementById("userform").onsubmit = function(e) {`
+- This attaches a submit event to the form whose id is `userform`.
+- Whenever the form is submitted, this function runs.
+
+`e.preventDefault();`
+- Prevents the form from reloading the page.
+- This allows JavaScript to handle the submission manually.
+
+`const user = {`
+- Starts creating a JavaScript object named `user`.
+
+`name: document.getElementById("name").value,`
+- Reads the value entered in the input field with id `name`.
+
+`email: document.getElementById("email").value`
+- Reads the value entered in the input field with id `email`.
+
+`};`
+- Ends the object creation.
+
+Example object:
+`{ name: "Aayush", email: "aayush@example.com" }`
+
+`const xhr = new XMLHttpRequest();`
+- Creates an AJAX request object.
+- This object is used to send data to the server in the background.
+
+`xhr.open("POST","saveuser");`
+- Prepares the request.
+- `POST` means data is being sent to the server.
+- `saveuser` is the server route or URL.
+
+`xhr.onload = function() {`
+- This function runs when the server sends a response back.
+
+`let users = JSON.parse(localStorage.getItem("users")) || [];`
+- Reads old user data from `localStorage`.
+- `localStorage.getItem("users")` gets the stored string value.
+- `JSON.parse(...)` converts the string into a JavaScript array.
+- `|| []` means if there is no data, use an empty array.
+
+`users.push(user);`
+- Adds the new user object to the array.
+
+`localStorage.setItem("users",JSON.stringify(users));`
+- Stores the updated array back in `localStorage`.
+- `JSON.stringify(users)` converts the array into string format.
+
+`alert("user saved!");`
+- Shows a popup message after saving.
+
+`document.getElementById("userform").reset();`
+- Clears all input fields in the form.
+
+`};`
+- Ends the `onload` function.
+
+`xhr.send(JSON.stringify(user));`
+- Sends the user object to the server in JSON format.
+
+`};`
+- Ends the form submit function.
+
+
+4. Working of user.html
+-----------------------
+This page is used to display the users stored in `localStorage`.
+
+The page contains a table with two columns:
+- Name
+- Email
+
+When `user.html` opens:
+1. JavaScript reads the `users` array from `localStorage`.
+2. It gets the table element.
+3. It loops through each user object.
+4. It adds one row for each user into the table.
+
+
+5. Line-by-Line Explanation of user.html Script
+-----------------------------------------------
+`const users = JSON.parse(localStorage.getItem("users")) || [];`
+- Reads stored user data from `localStorage`.
+- Converts it from string into an array.
+- If no data exists, an empty array is used.
+
+`const table = document.getElementById("usertable");`
+- Selects the table element from the HTML page.
+
+`users.forEach(u => {`
+- Loops through every user in the array.
+
+`table.innerHTML += \`<tr><td>${u.name}</td><td>${u.email}</td></tr>\`;`
+- Adds one new row into the table for each user.
+- `${u.name}` displays the name.
+- `${u.email}` displays the email.
+
+`});`
+- Ends the loop.
+
+
+6. Theory of AJAX
+-----------------
+AJAX stands for:
+`Asynchronous JavaScript and XML`
+
+In modern web development, AJAX usually works with JSON instead of XML.
+
+Main idea of AJAX:
+- It allows a webpage to send and receive data from a server
+- It works without refreshing the whole page
+- It makes the application faster and smoother
+
+In this project:
+- `XMLHttpRequest` is used as the AJAX method
+- user data is sent to the server using `POST`
+- the page does not reload during submission
+
+
+7. Uses of AJAX
+---------------
+AJAX is commonly used in:
+- login forms
+- registration forms
+- live search suggestions
+- chat applications
+- dashboards
+- loading data without refreshing the page
+
+Benefits of AJAX:
+- better user experience
+- faster interaction
+- reduced full page reloads
+- background communication with the server
+
+
+8. localStorage Theory
+----------------------
+`localStorage` is browser storage used to save data as key-value pairs.
+
+Important points:
+- data is stored in the browser
+- data remains even after page refresh
+- values are stored only as strings
+- arrays and objects must be converted using `JSON.stringify()`
+- stored strings must be converted back using `JSON.parse()`
+
+In this project, the key used is:
+- `users`
+
+
+9. Console Commands for localStorage
+------------------------------------
+View saved users:
+`localStorage.getItem("users")`
+
+Remove only user data:
+`localStorage.removeItem("users")`
+
+Clear all localStorage data for the current site:
+`localStorage.clear()`
+
+
+10. Full Flow of the Project
+----------------------------
+1. User opens `index.html`.
+2. User enters name and email.
+3. Form submission is handled using JavaScript.
+4. AJAX sends the data to the server.
+5. After response, user data is stored in `localStorage`.
+6. User clicks `View users`.
+7. `user.html` opens.
+8. Saved users are read from `localStorage`.
+9. The users are shown in the table.
+
+
+11. Short Viva Explanation
+--------------------------
+You can explain this project like this:
+
+"This project is a simple user registration system built using HTML, JavaScript, AJAX, and localStorage. The `index.html` page collects name and email from the user and sends the data using `XMLHttpRequest`. After the request is completed, the data is saved in localStorage. The `user.html` page reads that data from localStorage and displays it in a table. AJAX is used so that data can be sent without reloading the page."
+
+
+12. Important Note
+------------------
+In the current code, the user data is saved in `localStorage` when `xhr.onload` runs. This means it saves data after the request finishes loading, but it does not check whether the server response was successful.
+
+A better version would check:
+`xhr.status === 200`
+
+That would make the logic safer and more correct.
