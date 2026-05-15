@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ecommerce Admin Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="row">
+
+        <div class="col-md-2 sidebar">
+            <h3 class="text-center mt-3">Admin</h3>
+            <ul class="nav flex-column mt-4">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-house"></i> Dashboard
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-cart"></i> Orders
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-box"></i> Products
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-people"></i> Customers
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <i class="bi bi-gear"></i> Settings
+                    </a>
+                </li>
+
+            </ul>
+        </div>
+
+        <div class="col-md-10 main-content">
+
+            <nav class="navbar bg-white p-3 shadow-sm mb-4">
+                <input type="text" placeholder="Search" class="form-control w-25">
+
+                <span class="fw-bold">Welcome Admin</span>
+            </nav>
+
+            <div class="row">
+
+                <div class="col-md-3 mb-3">
+                    <div class="card card-box card1">
+                        <div class="card-body">
+                            <h5>Total Sales</h5>
+                            <h3>₹50,000</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <div class="card card-box card2">
+                        <div class="card-body">
+                            <h5>Orders</h5>
+                            <h3>1200</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <div class="card card-box card3">
+                        <div class="card-body">
+                            <h5>Customers</h5>
+                            <h3>850</h3>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <div class="card card-box card4">
+                        <div class="card-body">
+                            <h5>Revenue</h5>
+                            <h3>₹2,50,000</h3>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="mt-4">
+
+                <h4>Recent Orders</h4>
+
+                <table class="table table-bordered bg-white">
+
+                    <thead>
+                        <tr>
+                            <th>Order ID</th>
+                            <th>Customer</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td>#101</td>
+                            <td>Aayush</td>
+                            <td>Delivered</td>
+                        </tr>
+
+                        <tr>
+                            <td>#102</td>
+                            <td>Rahul</td>
+                            <td>Pending</td>
+                        </tr>
+
+                        <tr>
+                            <td>#103</td>
+                            <td>Sneha</td>
+                            <td>Shipped</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+            </div>
+
+            <footer class="text-center mt-4">
+                <p>© 2026 Ecommerce Dashboard</p>
+            </footer>
+
+        </div>
+
+    </div>
+</div>
+
+</body>
+</html>
