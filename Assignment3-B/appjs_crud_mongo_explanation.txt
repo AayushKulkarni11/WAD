@@ -1,0 +1,267 @@
+Assignment3-B app.js Explanation
+
+1. Purpose of this file
+This file is the main server file of the project. It creates an Express application, connects the app to MongoDB using Mongoose, sets up middleware, defines routes, and starts the server.
+
+2. Imported modules
+- express: Used to create the web server and define routes.
+- mongoose: Used to connect Node.js with MongoDB.
+- ./models/user: Imports the User model, which defines the structure of user data stored in MongoDB.
+
+Code:
+const express = require('express');
+const mongoose = require('mongoose');
+const User = require('./models/user');
+
+3. Creating the Express app
+Code:
+const app = express();
+
+This creates the Express application object. We use this object to configure the app and define routes.
+
+4. MongoDB connection
+Code:
+const dbURI = "mongodb://127.0.0.1:27017/crud";
+
+Meaning of this URL:
+- 127.0.0.1 means MongoDB is running on your own computer.
+- 27017 is the default MongoDB port.
+- crud is the database name.
+
+Code:
+mongoose.connect(dbURI)
+  .then(() => {
+    console.log("Database connected");
+    app.listen(3000, () => console.log("Server listening on port 3000"));
+  })
+  .catch(err => console.log(err));
+
+What happens here:
+- The app first tries to connect to MongoDB.
+- If connection is successful, it prints "Database connected".
+- Then the server starts on port 3000.
+- If connection fails, the error is printed.
+
+Why start the server after DB connection?
+This ensures the app only accepts requests when the database is available.
+
+5. App configuration
+Code:
+app.set('view engine', 'ejs');
+app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+
+Explanation:
+- app.set('view engine', 'ejs'):
+  Tells Express to use EJS templates for rendering dynamic pages.
+
+- app.use(express.static('public')):
+  Makes files inside the public folder available directly, such as CSS files.
+
+- app.use(express.urlencoded({ extended: true })):
+  Reads form data sent using POST requests and stores it in req.body.
+
+6. Default route
+Code:
+app.get('/', (req, res) => res.redirect('/users'));
+
+When the user opens the home URL, the app redirects to /users.
+
+7. Route to display all users
+Code:
+app.get('/users', async (req, res) => {
+  try {
+    const users = await User.find().sort({ createdAt: -1 });
+    res.render('index', { users, title: 'Home' });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error fetching users");
+  }
+});
+
+Explanation:
+- User.find() gets all user documents from MongoDB.
+- .sort({ createdAt: -1 }) sorts them in descending order of creation time.
+- res.render('index', { users, title: 'Home' }) sends the data to the EJS page.
+
+CRUD operation:
+- This is Read because it fetches records from the database.
+
+8. Route to open the create-user form
+Code:
+app.get('/user/create', (req, res) => res.render('adduser', { title: 'Add-User' }));
+
+Explanation:
+- This route shows the form used to add a new user.
+- It does not write to the database yet.
+
+9. Route to display one user's details
+Code:
+app.get('/users/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.render('details', { user, title: 'User Details' });
+  } catch (err) {
+    console.log(err);
+    res.status(404).render('404', { title: 'User Not Found' });
+  }
+});
+
+Explanation:
+- :id is a route parameter.
+- req.params.id contains the selected user's MongoDB document id.
+- User.findById(...) fetches one user.
+- If found, the details page is shown.
+- If not found, a 404 page is shown.
+
+CRUD operation:
+- This is also Read.
+
+10. Route to open the edit form
+Code:
+app.get('/edit/:id', async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    res.render('edit', { user, title: 'Edit-User' });
+  } catch (err) {
+    console.log(err);
+    res.status(404).render('404', { title: 'User Not Found' });
+  }
+});
+
+Explanation:
+- Fetches the existing user by id.
+- Sends that user data to the edit form.
+- The form will already contain the current values.
+
+This route prepares for Update, but by itself it is only reading data.
+
+11. Route to create a new user
+Code:
+app.post('/user/create', async (req, res) => {
+  try {
+    const user = new User(req.body);
+    await user.save();
+    res.redirect('/users');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error creating user");
+  }
+});
+
+Explanation:
+- req.body contains the submitted form data.
+- new User(req.body) creates a new Mongoose document.
+- await user.save() stores the new record in MongoDB.
+- After saving, the app redirects to /users.
+
+CRUD operation:
+- This is Create.
+
+12. Route to update an existing user
+Code:
+app.post('/edit/:id', async (req, res) => {
+  try {
+    await User.findByIdAndUpdate(req.params.id, req.body);
+    res.redirect('/users');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error updating user");
+  }
+});
+
+Explanation:
+- Finds the user by id.
+- Replaces the matching fields using submitted form data.
+- Redirects to the users list after update.
+
+CRUD operation:
+- This is Update.
+
+13. Route to delete a user
+Code:
+app.post('/users/delete/:id', async (req, res) => {
+  try {
+    await User.findByIdAndDelete(req.params.id);
+    res.redirect('/users');
+  } catch (err) {
+    console.log(err);
+    res.status(500).send("Error deleting user");
+  }
+});
+
+Explanation:
+- Finds the user by id.
+- Deletes that document from MongoDB.
+- Redirects back to the list page.
+
+CRUD operation:
+- This is Delete.
+
+14. 404 handler
+Code:
+app.use((req, res) => res.status(404).render('404', { title: 'NotFound' }));
+
+Explanation:
+- This runs if no earlier route matches.
+- It returns status code 404 and renders the 404 page.
+
+15. What CRUD means in this project
+CRUD stands for:
+- Create: Add a new user
+- Read: View all users or one user's details
+- Update: Edit an existing user
+- Delete: Remove a user
+
+How it maps here:
+- Create -> POST /user/create
+- Read -> GET /users and GET /users/:id
+- Update -> POST /edit/:id
+- Delete -> POST /users/delete/:id
+
+16. How MongoDB is used locally
+This project uses MongoDB on the same computer instead of a cloud database.
+
+Local usage in this project:
+- MongoDB server must be running locally.
+- The app connects using mongodb://127.0.0.1:27017/crud
+- A database named crud is used.
+- Inside that database, Mongoose creates a collection for the User model.
+
+Why Mongoose is used:
+- It provides a schema for user data.
+- It makes database operations easier with methods like:
+  User.find()
+  User.findById()
+  user.save()
+  User.findByIdAndUpdate()
+  User.findByIdAndDelete()
+
+17. User model used by app.js
+The User model comes from models/user.js.
+
+It stores:
+- name
+- email
+- password
+- address
+- number
+
+It also uses timestamps: true, so MongoDB stores:
+- createdAt
+- updatedAt
+
+That is why /users can sort by createdAt.
+
+18. Flow of the app
+1. Start MongoDB locally.
+2. Run this Node.js app.
+3. The app connects to the local crud database.
+4. The server starts on http://localhost:3000
+5. User opens the site.
+6. Forms send data to Express routes.
+7. Express routes use the User model to perform CRUD operations in MongoDB.
+8. EJS pages display the results.
+
+19. In short
+This app.js file is the controller and setup file of the project. It connects Express with MongoDB, handles user requests, performs CRUD operations through the User model, and renders pages using EJS.
